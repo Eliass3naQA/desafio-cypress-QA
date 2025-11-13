@@ -1,11 +1,14 @@
 import ProductPage from '../pages/ProductPage';
 
+const productPage = new ProductPage();
+
+
 Cypress.Commands.add('addProduct', (product) => {
-  ProductPage.visitHome();
-  ProductPage.selectProduct(product.productName);
-  ProductPage.selectSize(product.size);
-  ProductPage.selectColor(product.color);
-  ProductPage.setQuantity(product.quantity);
-  ProductPage.addToCart();
-  ProductPage.verifyProductAdded(product.productName);
+  productPage.visitHome();
+  productPage.selectProduct(product.productName);
+  productPage.selectSize(product.size);
+  productPage.selectColor(product.color);
+  productPage.setQuantity(product.quantity);
+  productPage.addToCart();
+  productPage.verifyProductAdded(product.productName);
 });

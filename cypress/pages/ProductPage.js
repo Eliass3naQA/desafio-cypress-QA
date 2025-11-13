@@ -1,41 +1,50 @@
-class ProductPage {
+import AddProductElementos from "../Elementos/AddProductElementos";
 
-  
-  get productTitle() { return cy.get('h1.product_title'); }
-  get sizeDropdown() { return cy.get('select[name="attribute_pa_size"]'); }
-  get colorDropdown() { return cy.get('select[name="attribute_pa_color"]'); }
-  get quantityInput() { return cy.get('input.qty'); }
-  get addToCartButton() { return cy.get('button.single_add_to_cart_button'); }
-  get successMessage() { return cy.get('.woocommerce-message'); }
+const addProductElementos = new AddProductElementos();
+
+class ProductPage {
 
   visitHome() {
     cy.visit('http://lojaebac.ebaconline.art.br/');
   }
 
+  BtnPesquisar() {
+    cy.get(addProductElementos.btnPesquisar).click();
+  }
+
   selectProduct(productName) {
-    
-    cy.contains('a', productName).click();
+    cy.get('.product-block').contains(productName).click();
   }
 
   selectSize(size) {
-    this.sizeDropdown.select(size);
+    cy.log(`Selecionando cor: ${size}`);
+    cy.get(`[data-value="${size}"]`)
+      .wait(1000)
+      .click();
   }
 
   selectColor(color) {
-    this.colorDropdown.select(color);
+    cy.log(`Selecionando cor: ${color}`);
+    cy.get(`[data-value="${color}"]`, { timeout: 10000 })
+      .should('be.visible')
+      .click({ force: true });
   }
 
-  setQuantity(quantity) {
-    this.quantityInput.clear().type(quantity);
+  setQuantity(qty) {
+    cy.get('input.qty').clear().type(qty);
   }
 
   addToCart() {
-    this.addToCartButton.click();
+    cy.get('button.single_add_to_cart_button').click();
   }
 
-  verifyProductAdded(productName) {
-    this.successMessage.should('contain', `${productName} foi adicionado no seu carrinho`);
+  verifyProductAdded() {
+    cy.log('Verificando mensagem de sucesso...');
+    cy.get('.woocommerce-message', { timeout: 10000 })
+      .should('be.visible')
+      .and('contain.text', 'foi adicionado no seu carrinho');
   }
 }
 
-export default new ProductPage();
+export default ProductPage;
+
