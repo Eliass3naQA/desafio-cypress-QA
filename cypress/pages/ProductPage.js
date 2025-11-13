@@ -42,7 +42,7 @@ class ProductPage {
     cy.log('Verificando mensagem de sucesso...');
     cy.get('.woocommerce-message', { timeout: 10000 })
       .should('be.visible')
-      .and('contain.text', 'foi adicionado no seu carrinho');
+      .and('contain.text', 'no seu carrinho');
   }
 }
 

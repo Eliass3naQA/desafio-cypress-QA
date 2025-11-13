@@ -1,24 +1,14 @@
 /// <reference types="cypress" />
 
-describe('Fluxo: Adicionar produto ao carrinho', () => {
+describe('Fluxo: Adicionar múltiplos produtos ao carrinho', () => {
   
   beforeEach(() => {
-    
-    cy.log('Carregando dados do produto...');
-    cy.fixture('product').as('productData');
+    cy.log('Carregando lista de produtos...');
+    cy.fixture('product').as('products');
   });
 
-  it('Deve adicionar um produto ao carrinho com sucesso', function() {
-    cy.log('Iniciando o teste de adicionar produto ao carrinho');
-
-    
-    cy.addProduct(this.productData);
-
-    
-    cy.log('Verificando se o produto foi adicionado com sucesso');
-    cy.contains('foi adicionado no seu carrinho').should('be.visible');
-
-    cy.log('Teste finalizado com sucesso!');
+  it('Deve adicionar vários produtos ao carrinho com sucesso', function() {
+    cy.log('Iniciando o teste de adicionar múltiplos produtos');
+    cy.addProduct(this.products);
   });
-
 });

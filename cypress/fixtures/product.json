@@ -1,7 +1,15 @@
 
-{
-  "productName": "Ingrid Running Jacket",
-  "size": "M",
-  "color": "White",
-  "quantity": 1
-}
+[
+  {
+    "productName": "Ingrid Running Jacket",
+    "size": "M",
+    "color": "White",
+    "quantity": 1
+  },
+  {
+    "productName": "Augusta Pullover Jacket",
+    "size": "S",
+    "color": "Blue",
+    "quantity": 2
+  }
+]
